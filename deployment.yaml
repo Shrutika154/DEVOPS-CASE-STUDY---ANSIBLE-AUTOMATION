@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cnd-web-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cnd-web
+  template:
+    metadata:
+      labels:
+        app: cnd-web
+    spec:
+      containers:
+      - name: cnd-web-container
+        image: docker.io/library/cnd-web-app:v1
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: "32Mi"
+            cpu: "50m"
+          limits:
+            memory: "128Mi"
+            cpu: "250m"
